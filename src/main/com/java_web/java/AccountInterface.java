@@ -3,5 +3,5 @@ public interface AccountInterface {
   AccountTypes accountType = AccountTypes.SAVINGS;
   String accountNumber = "";
   String phoneNumber = "";
-  double accountBalance = 0.00;
+  double balance = 0.00;
 }

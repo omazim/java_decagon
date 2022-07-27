@@ -1,6 +1,6 @@
 import java.util.HashMap;
-import java.io.*;  
-import java.net.*;
+// import java.io.*;  
+// import java.net.*;
 
 public class Main {
   public static void main(String[] args) {
@@ -24,20 +24,20 @@ public class Main {
     System.out.println();
   }
 
-  private static void _listen () {
+  // private static void _listen () {
     
-    try {
-      ServerSocket ss = new ServerSocket(6666);  
-      Socket s = ss.accept();//establishes connection   
-      DataInputStream dis = new DataInputStream(s.getInputStream());  
-      String  str = (String) dis.readUTF();  
-      System.out.println("message= " + str);
+  //   try {
+  //     ServerSocket ss = new ServerSocket(6666);  
+  //     Socket s = ss.accept();//establishes connection   
+  //     DataInputStream dis = new DataInputStream(s.getInputStream());  
+  //     String  str = (String) dis.readUTF();  
+  //     System.out.println("message= " + str);
 
-      ss.close();  
-    } catch (IOException ex) {
-      System.out.println(ex.getMessage());
-    }
-  }
+  //     ss.close();  
+  //   } catch (IOException ex) {
+  //     System.out.println(ex.getMessage());
+  //   }
+  // }
 }
 
 // public class MyServer {  

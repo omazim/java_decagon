@@ -1,7 +1,10 @@
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class VaultManager {
+public class VaultManager implements AccountInterface {
 
   public VaultManager () {
   
@@ -12,6 +15,9 @@ public class VaultManager {
   }
 
   protected String accountNumber;
+  protected String accountName;
+  protected String phoneNumber;
+  protected String accountType;
 
   public double updateBalance (String accountNumber, double amount) {
     
@@ -35,6 +41,7 @@ public class VaultManager {
     ledger.add(entry);
   }
 
-  public static HashMap<String, Double> balanceMap = new HashMap<String, Double>();
-  public static ArrayList<HashMap<String, Double>> ledger = new ArrayList<HashMap<String, Double>>();
+  public static ConcurrentHashMap<String, Double> balanceMap = new ConcurrentHashMap<String, Double>();
+  // public static ArrayList<HashMap<String, Double>> ledger = new ArrayList<HashMap<String, Double>>();
+  public static Queue<HashMap<String, Double>> ledger = new ConcurrentLinkedQueue<HashMap<String, Double>>();
 }

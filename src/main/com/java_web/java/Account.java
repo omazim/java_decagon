@@ -1,3 +1,5 @@
+package com.java_web;
+
 // import java.util.Arrays;
 import java.util.HashMap;
 
@@ -46,13 +48,14 @@ public class Account extends AccountManager {
         throw new AccountCredentialsException("Invalid phone number. Please enter 11 digits.");
       }
       
-      this.accountName = credentialsMap.get(AccountCredentialHashMapKeys.accountNumber.name());
+      this.accountName = credentialsMap.get(AccountCredentialHashMapKeys.accountName.name());
       this.phoneNumber = credentialsMap.get(AccountCredentialHashMapKeys.phoneNumber.name());
       this.accountType = credentialsMap.get(AccountCredentialHashMapKeys.accountType.name());
       
       this._generateAccountNumber();
 
-      this._openAccount();      
+      this._openAccount();
+
       System.out.println("Account number: " + this.accountNumber);
     } catch (AccountCredentialsException ex) {
       System.out.println("error 1: " + ex.getMessage());

@@ -1,14 +1,17 @@
-// import java.util.Iterator;
-import java.util.concurrent.ConcurrentHashMap;
-
-import javax.servlet.http.ServletException;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import java.io.*;  
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+// import com.google.gson.JsonElement;
+
+import java.io.*;
+// import java.util.ArrayList;  
+import java.util.ArrayList;
 
 public class AccountManagementServlet extends HttpServlet {
   
@@ -65,31 +68,53 @@ public class AccountManagementServlet extends HttpServlet {
     
   }
 
-  public static ConcurrentHashMap<Integer, String> chmap = new ConcurrentHashMap<Integer, String>();
-
   @Override
-  public void doPost  (HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    
+  public void doPost (HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
     // Get path info so we can route request.
     // Identify session.
     // concurrently manage entries in vault manager.
 
-    final String path = req.getPathInfo();
-    final JSONObject reqJSON = incomingJSON(req); 
+    final JSONObject reqJSON = incomingJSON(req);   
+    final String operationKey = "operation";
+    final String operationParam = String.valueOf(reqJSON.get(operationKey));
+    final GsonBuilder gsonBuilder = new GsonBuilder();		
+		final Gson gson = gsonBuilder.create(); 
+    
     String resJSON = "";
-    PrintWriter out = res.getWriter();
+    String loopKey = "loop";
+    String loop = String.valueOf(reqJSON.get(loopKey));
+    // System.out.println("operation: " + operationParam + ", loop" + loop);
+    short loopCount = loop.isEmpty() ? 1: Short.valueOf(loop);
 
-    switch (path) {
-      case "/create_account":
+		PrintWriter out = res.getWriter();
+
+    switch (operationParam) {
+      case "create_accounts":
         
-        resJSON = CreateAccount.createAccount(reqJSON);
+        // Technical requirement: generate 10 accounts;
+        try {
+          final ArrayList<AccountInterface> accounts = CreateAccount.createAccount(reqJSON, loopCount);
+          System.out.println("accounts created: " + accounts.size());
+          resJSON = gson.toJson(accounts);
+          System.out.println("accounts created: " + resJSON);
+        } catch (Exception ex) {
+          System.out.println(ex.getMessage());
+        }
+        break;
+      
+      case "deposit_amounts":
+        
+        // Technical requirement: generate 10 accounts;
+        // count = 20;
+        // final ArrayList<String> accountNumbers = CreateAccount.createAccount(reqJSON, count);
+        // resJSON = gson.toJson(accountNumbers);
 
         break;
-    
       default:
         break;
     }
-    
+        
     res.setContentType("application/json");
     res.setCharacterEncoding("UTF-8");
     

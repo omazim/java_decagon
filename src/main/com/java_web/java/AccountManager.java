@@ -1,8 +1,10 @@
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Random;
 
-public class AccountManager extends VaultManager implements AccountInterface {
+public class AccountManager extends VaultManager {
   
-  public static HashMap<String, HashMap<String, Object>> accountsMap;
+  public static ConcurrentHashMap<String, HashMap<String, Object>> accountsMap;
 
   public AccountManager () {}
 
@@ -18,7 +20,7 @@ public class AccountManager extends VaultManager implements AccountInterface {
       if (accountsMap.size() == 0) {
 
         System.out.println("first account to be opened.");
-        accountsMap = new HashMap<String, HashMap<String, Object>>();    
+        accountsMap = new ConcurrentHashMap<String, HashMap<String, Object>>();    
       }
       
       details.put("accountNumber", this.accountNumber);
@@ -33,11 +35,6 @@ public class AccountManager extends VaultManager implements AccountInterface {
     }
   }
 
-  protected String accountNumber;
-  protected String accountName;
-  protected String phoneNumber;
-  protected String accountType;
-
   // private short accountNumberLength = 10;
   private short phoneNumberLength = 11;
   private short accountNameMinLength = 5;
@@ -45,15 +42,18 @@ public class AccountManager extends VaultManager implements AccountInterface {
    
   protected void _generateAccountNumber () {
     System.out.println("generating account number...");
-    this.accountNumber = this.phoneNumber.substring(1);
+        
+    Random random = new Random();
+    String digits = String.valueOf(Math.abs(random.nextLong())).substring(0, 9); 
+    this.accountNumber = "0" + digits;
   }
 
   public void _openAccount () {
     
-    // System.out.println("updating accounts...");
+    System.out.println("updating accounts...");
     this.updateAccounts();
 
-    // System.out.println("updating initial account balance...");
+    System.out.println("updating initial account balance...");
     // this.updateBalance(accountNumber, 0.00);
 
     this.isOpened = true;
