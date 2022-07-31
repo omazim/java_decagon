@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 
-public class DepositManager extends TransactionManager {
+public class WithdrawalManager extends TransactionManager {
 
-  public DepositManager (String accountNumber) {
+  public WithdrawalManager (String accountNumber) {
     super(accountNumber);
   }
 
-  public ArrayList<TransactionLog> runDeposits (JSONObject json, short count) {
+  public ArrayList<TransactionLog> runWithdrawal (JSONObject json, short count) {
     
     for (int i = 0; i < count; i++) {
 
@@ -19,9 +19,9 @@ public class DepositManager extends TransactionManager {
       final double amount = Double.parseDouble((String) json.get(amountKey));
       final double adjustedAmount = (double) amount * counter;
       
-      if (deposit(adjustedAmount)) System.out.println("deposited " + adjustedAmount); 
+      if (withdraw(adjustedAmount)) System.out.println("withdrawn " + adjustedAmount); 
     }    
     
-    return this.depositHistory();
+    return this.withdrawalHistory();
   }
 }

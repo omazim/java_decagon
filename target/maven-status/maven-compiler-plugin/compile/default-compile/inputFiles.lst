@@ -3,6 +3,7 @@ C:\wamp\www\java_decagon\src\main\java\com\java_web\TransactionManager.java
 C:\wamp\www\java_decagon\src\main\java\com\java_web\Main.java
 C:\wamp\www\java_decagon\src\main\java\com\java_web\TransactionLog.java
 C:\wamp\www\java_decagon\src\main\java\com\java_web\AccountManager.java
+C:\wamp\www\java_decagon\src\main\java\com\java_web\WithdrawalManager.java
 C:\wamp\www\java_decagon\src\main\java\com\java_web\LedgerDetailsKeys.java
 C:\wamp\www\java_decagon\src\main\java\com\java_web\AccountCredentialHashMapKeys.java
 C:\wamp\www\java_decagon\src\main\java\com\java_web\AccountCredentialsException.java
@@ -14,3 +15,4 @@ C:\wamp\www\java_decagon\src\main\java\com\java_web\AccountTypes.java
 C:\wamp\www\java_decagon\src\main\java\com\java_web\TransactionDetailsKeys.java
 C:\wamp\www\java_decagon\src\main\java\com\java_web\TransactionResult.java
 C:\wamp\www\java_decagon\src\main\java\com\java_web\VaultManager.java
+C:\wamp\www\java_decagon\src\main\java\com\java_web\TransactionTypesEnum.java

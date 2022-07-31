@@ -116,14 +116,14 @@
             
             <!-- <input type="submit" value="Make random deposits" class="button"> -->
           </form>
-          <button class="button" onclick="submit('depositFundsForm')">Create Account</button>
+          <button class="button" onclick="submit('depositFundsForm')">Make deposit</button>
         </div>
       </div>      
     </div>
     <table id="deposited_funds">
       <tr>
         <th>Account Number</th>
-        <th>Amount Depsoited</th>
+        <th>Amount Deposited</th>
         <th>Balance</th>
       </tr>
     </table>
@@ -134,23 +134,33 @@
     <div class="row">
       <div class="col-75">
         <div class="container">
-          <form action="/action_page.php">
+          <form id="withdrawFundsForm" method="POST" onsubmit="return false">
           
             <div class="row">
               <div class="col-50">                
-                <label for="awnumber"><i class="fa fa-user"></i> Account Number</label>
-                <input type="text" id="awnumber" name="awnumber" placeholder="12345678901">
-                <label for="wamount"><i class="fa fa-envelope"></i> Amount</label>
-                <input type="number" id="wamount" name="wamount" placeholder="Enter amount">
-                
+                <label for="accountNumber"><i class="fa fa-user"></i> Account Number</label>
+                <input type="text" id="accountNumber" name="accountNumber" placeholder="12345678901">
+                <label for="amount"><i class="fa fa-envelope"></i> Amount</label>
+                <input type="number" id="amount" name="amount" placeholder="Enter amount">
+                <label for="loop"><i class="fa fa-envelope"></i> Loop</label>
+                <input type="number" id="loop" name="loop" value="20" placeholder="Enter loop number">
+                <input hidden="true" id="operation" name="operation" value="withdraw_funds">
               </div>              
             </div>
             
-            <input type="submit" value="Make random withdrawals" class="button">
+            <!-- <input type="submit" value="Make random withdrawals" class="button"> -->
           </form>
+          <button class="button" onclick="submit('withdrawFundsForm')">Make withdrawal</button>
         </div>
       </div>      
     </div>
+    <table id="withdrawn_funds">
+      <tr>
+        <th>Account Number</th>
+        <th>Amount Withdrawn</th>
+        <th>Balance</th>
+      </tr>
+    </table>
     <hr>
     <!-- Transaction logs. -->
     <h2>Transactions Log</h2>
@@ -194,8 +204,11 @@
               case "create_accounts":// Operation: Create Accounts.
                 handleAccountCreationResponse(this.responseText);
                 break;
-              case "deposit_funds":// Operation: Depsoit Funds.
+              case "deposit_funds":// Operation: Deposit Funds.
                 handleDepositFundsResponse(this.responseText);
+                break;
+              case "withdraw_funds":// Operation: Withdraw Funds.
+                handleWithdrawFundsResponse(this.responseText);
                 break;
             }
           }
@@ -225,8 +238,7 @@
         });
       }
 
-      function handleDepositFundsResponse (responseText) {
-        const table = document.getElementById("deposited_funds");
+      function displayTransactions (responseText, table) {
         const txns = JSON.parse(responseText);
 
         // Clear out table...
@@ -248,6 +260,18 @@
           amountCell.innerHTML = txn.amount;
           balanceCell.innerHTML = txn.runningBalance;
         });
+      }
+
+      function handleDepositFundsResponse (responseText) {
+        const table = document.getElementById("deposited_funds");
+        
+        displayTransactions(responseText, table);
+      }
+
+      function handleWithdrawFundsResponse (responseText) {
+        const table = document.getElementById("withdrawn_funds");
+        
+        displayTransactions(responseText, table);
       }
     </script>
 

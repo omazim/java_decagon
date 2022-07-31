@@ -29,10 +29,8 @@ public class VaultManager implements AccountInterface {
     System.out.println("update balance for " + accountNumber + " with new balance: " + newBalance);
     accountBalancesMap.put(accountNumber, newBalance);
 
-    if (amount > 0.00) {
-      this._updateLedger(amount, newBalance);
-    }
-
+    if (amount != 0.00) this._updateLedger(amount, newBalance);
+    
     return newBalance;
   }
 

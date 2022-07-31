@@ -75,4 +75,8 @@ public class AccountManager extends VaultManager {
   }
 
   public boolean isOpened = false;  
+
+  public boolean isValidAccount () {
+    return accountsMap.containsKey(accountNumber);
+  }
 }
