@@ -164,17 +164,13 @@ public class AccountManagementServlet extends HttpServlet {
         ArrayList<TransactionLog> txns = new ArrayList<TransactionLog>();
         try {
           final String accountNumber = (String) reqJSON.get(AccountCredentialHashMapKeys.accountNumber.name());
-          final TransactionManager txnManager = new TransactionManager(accountNumber);          
-          txns = txnManager.history();
-                    
-          System.out.println("funds withdrawn: " + resJSON);
-        } catch (JSONException ex) {
-          System.out.println("error@jsontxn_history case: " + ex.getMessage());
-          final TransactionManager txnManager = new TransactionManager();          
+          final TransactionManager txnManager = accountNumber.isEmpty() ? new TransactionManager(): new TransactionManager(accountNumber);          
           txns = txnManager.history();
 
+          System.out.println("account number was empty? " + accountNumber.isEmpty());
+          System.out.println("txn log count: " + txns.size());
         } catch (Exception ex) {
-          System.out.println("error@withdraw_funds case: " + ex.getMessage());
+          System.out.println("error@txn_history case: " + ex.getMessage());
         } finally {
 
           Collections.reverse(txns);

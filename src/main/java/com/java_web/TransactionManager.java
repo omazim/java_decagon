@@ -45,8 +45,8 @@ public class TransactionManager extends AccountManager {
 
   public ArrayList<TransactionLog> history () {
 
-    // System.out.println("getting history for " + accountNumber);
-    final boolean useAccountFilter = this.accountNumber == null;
+    System.out.println("getting history for " + accountNumber);
+    final boolean useAccountFilter = this.accountNumber != null;
 
     return this.transactionLogs(TransactionTypesEnum.ALL, useAccountFilter);
   }
