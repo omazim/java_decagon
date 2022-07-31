@@ -7,6 +7,4 @@ com\java_web\AccountTypes.class
 com\java_web\AccountInterface.class
 com\java_web\TransactionManager.class
 com\java_web\VaultManager.class
-com\java_web\AccountManagementServlet.class
-com\java_web\TransactionLogInterface.class
 com\java_web\Main.class

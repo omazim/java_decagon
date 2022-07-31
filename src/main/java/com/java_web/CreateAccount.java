@@ -32,12 +32,7 @@ public class CreateAccount {
       
       Account account = new Account(credentialsMap);
       
-      if (account.isOpened) {
-        System.out.println("account name: " + account.accountName);
-        System.out.println("account number: " + account.accountNumber);
-        System.out.println("phone number: " + account.phoneNumber);
-        accountsList.add(account);
-      }
+      if (account.isOpened) accountsList.add(account);
     }
     System.out.println("accounts opened in request: " + accountsList);
     return accountsList;

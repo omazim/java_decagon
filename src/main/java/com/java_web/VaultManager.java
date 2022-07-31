@@ -1,8 +1,6 @@
 package com.java_web;
 
 import java.util.HashMap;
-import java.util.Optional;
-import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -22,33 +20,30 @@ public class VaultManager implements AccountInterface {
   protected String accountType;
   protected double balance;
 
-  public double updateBalance (String accountNumber, double amount) {
-    
+  public double updateBalance (double amount) {
+        
     final double insituBalance = accountBalancesMap.containsKey(accountNumber) ? accountBalancesMap.get(accountNumber): 0.00;
     final double prevBalance = (double) insituBalance;
     final double newBalance = amount + prevBalance;
 
+    System.out.println("update balance for " + accountNumber + " with new balance: " + newBalance);
     accountBalancesMap.put(accountNumber, newBalance);
 
     if (amount > 0.00) {
-      this._updateLedger(accountNumber, amount, newBalance);
+      this._updateLedger(amount, newBalance);
     }
 
     return newBalance;
   }
 
-  private void _updateLedger (String accountNumber, double amount, double balance) {
+  private void _updateLedger (double amount, double balance) {
     
-    final HashMap<String, Object> ledgerEntry = new HashMap<String, Object>();
-    
-    ledgerEntry.put(LedgerDetailsKeys.accountNumber.name(), accountNumber);
-    ledgerEntry.put(LedgerDetailsKeys.amount.name(), amount);
-    ledgerEntry.put(LedgerDetailsKeys.balance.name(), amount);
-    
+    TransactionLog ledgerEntry = new TransactionLog(accountNumber, amount, balance);
+
     ledger.add(ledgerEntry);
   }
 
   public static ConcurrentHashMap<String, Double> accountBalancesMap = new ConcurrentHashMap<String, Double>();
-  // public static ArrayList<HashMap<String, Double>> ledger = new ArrayList<HashMap<String, Double>>();
-  public static Queue<HashMap<String, Object>> ledger = new ConcurrentLinkedQueue<HashMap<String, Object>>();
+  
+  public static ConcurrentLinkedQueue<TransactionLog> ledger = new ConcurrentLinkedQueue<TransactionLog>();
 }

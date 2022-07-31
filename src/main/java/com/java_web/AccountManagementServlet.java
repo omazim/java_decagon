@@ -109,7 +109,7 @@ public class AccountManagementServlet extends HttpServlet {
           final ArrayList<AccountInterface> accounts = CreateAccount.createAccount(reqJSON, loopCount);
           System.out.println("accounts created: " + accounts.size());
           resJSON = gson.toJson(accounts);
-          // System.out.println("accounts created: " + resJSON);
+          System.out.println("accounts created: " + resJSON);
         } catch (Exception ex) {
           System.out.println(ex.getMessage());
         }
@@ -122,12 +122,15 @@ public class AccountManagementServlet extends HttpServlet {
         // final ArrayList<String> accountNumbers = CreateAccount.createAccount(reqJSON, count);
         // resJSON = gson.toJson(accountNumbers);
         try {
-          final TransactionResult txns = DepositFunds.runDeposits(reqJSON, loopCount);
-          System.out.println("funds deposited: " + txns);
+          final String accountNumber = (String) reqJSON.get(AccountCredentialHashMapKeys.accountNumber.name());
+          final DepositManager depositManager = new DepositManager(accountNumber);          
+          final ArrayList<TransactionLog> txns = depositManager.runDeposits(reqJSON, loopCount);
+          
           resJSON = gson.toJson(txns);
-          // System.out.println("accounts created: " + resJSON);
+
+          System.out.println("funds deposited: " + resJSON);
         } catch (Exception ex) {
-          System.out.println(ex.getMessage());
+          System.out.println("error@deposit_funds case: " + ex.getMessage());
         }
 
         break;

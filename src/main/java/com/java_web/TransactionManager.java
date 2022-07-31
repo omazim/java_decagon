@@ -2,7 +2,7 @@ package com.java_web;
 
 import java.util.ArrayList;
 
-public class TransactionManager extends AccountManager {
+public class TransactionManager extends VaultManager {
   
   public TransactionManager () {}
 
@@ -16,7 +16,7 @@ public class TransactionManager extends AccountManager {
     boolean deposited = false;
 
     try {
-      this.updateBalance(this.accountNumber, amount);
+      this.updateBalance(amount);
 
       deposited = true;
     } catch (Exception ex) {
@@ -30,7 +30,7 @@ public class TransactionManager extends AccountManager {
     boolean withdrawn = false;
 
     try {
-      this.updateBalance(this.accountNumber, (amount * -1));
+      this.updateBalance((amount * -1));
 
       withdrawn = true;
     } catch (Exception ex) {
@@ -39,21 +39,34 @@ public class TransactionManager extends AccountManager {
     return withdrawn;
   }
 
-  public ArrayList<TransactionLogInterface> history () {
+  public ArrayList<TransactionLog> history () {
 
+    System.out.println("getting history for " + accountNumber);
     if (this.accountNumber == null) {
 
       return this.allTransactions();
     } else {
-      return this.transactionLog();
+      return this.transactionLogs();
     }    
   }
 
-  private ArrayList<TransactionLogInterface> allTransactions () {
-    return new ArrayList<TransactionLogInterface>();
+  private ArrayList<TransactionLog> allTransactions () {
+    
+    return new ArrayList<TransactionLog>();
   }
 
-  private ArrayList<TransactionLogInterface> transactionLog () {
-    return new ArrayList<TransactionLogInterface>();
+  private ArrayList<TransactionLog> transactionLogs () {
+    
+    final ArrayList<TransactionLog> txnLogs = new ArrayList<TransactionLog>();
+    
+    for (TransactionLog ledger: VaultManager.ledger) {
+      // System.out.println(ledger);
+      
+      final boolean pass = ledger.accountNumber.equals(accountNumber);
+
+      if (pass) txnLogs.add(ledger);      
+    }
+
+    return txnLogs;
   }
 }

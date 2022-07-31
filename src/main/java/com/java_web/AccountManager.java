@@ -58,7 +58,7 @@ public class AccountManager extends VaultManager {
     this.updateAccounts();
 
     System.out.println("updating initial account balance...");
-    this.balance = this.updateBalance(accountNumber, openingAmount);
+    this.balance = this.updateBalance(openingAmount);
 
     this.isOpened = true;
     System.out.println("account " + this.accountNumber + " opened successfully.");

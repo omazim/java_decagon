@@ -228,6 +228,12 @@
       function handleDepositFundsResponse (responseText) {
         const table = document.getElementById("deposited_funds");
         const txns = JSON.parse(responseText);
+
+        // Clear out table...
+        const rows = table.getElementsByTagName("tr");
+        while (rows.length > 1) {
+          rows[1].parentNode.removeChild(rows[1]);
+        }
         
         // Insert new rows to display accounts created.        
         txns.forEach((txn, i) => {
@@ -240,7 +246,7 @@
           // Account details.
           accountNumberCell.innerHTML = txn.accountNumber;
           amountCell.innerHTML = txn.amount;
-          balanceCell.innerHTML = txn.balance;
+          balanceCell.innerHTML = txn.runningBalance;
         });
       }
     </script>
