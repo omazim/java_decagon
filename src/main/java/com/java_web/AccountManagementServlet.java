@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
@@ -23,6 +24,8 @@ import com.google.gson.GsonBuilder;
 // import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class AccountManagementServlet extends HttpServlet {
   
@@ -93,10 +96,10 @@ public class AccountManagementServlet extends HttpServlet {
 		final Gson gson = gsonBuilder.create(); 
     
     String resJSON = "";
-    String loopKey = "loop";
-    String loop = String.valueOf(reqJSON.get(loopKey));    
-    short loopCount = loop.isEmpty() ? 1: Short.valueOf(loop);
-
+    final String loopKey = "loop";
+    String loop;    
+    short loopCount;
+    
 		PrintWriter out = res.getWriter();
 
     System.out.println("operation: " + operationParam + ", params: " + reqJSON);
@@ -105,6 +108,9 @@ public class AccountManagementServlet extends HttpServlet {
       case "create_accounts":
         
         // Technical requirement: generate 10 accounts;
+        loop = String.valueOf(reqJSON.get(loopKey));    
+        loopCount = loop.isEmpty() ? 1: Short.valueOf(loop);
+
         try {
           final ArrayList<AccountInterface> accounts = CreateAccount.createAccount(reqJSON, loopCount);
           System.out.println("accounts created: " + accounts.size());
@@ -118,6 +124,8 @@ public class AccountManagementServlet extends HttpServlet {
       case "deposit_funds":
         
         // Technical requirement: deposit 20 random amounts;
+        loop = String.valueOf(reqJSON.get(loopKey));    
+        loopCount = loop.isEmpty() ? 1: Short.valueOf(loop);
         try {
           final String accountNumber = (String) reqJSON.get(AccountCredentialHashMapKeys.accountNumber.name());
           final DepositManager depositManager = new DepositManager(accountNumber);          
@@ -134,6 +142,9 @@ public class AccountManagementServlet extends HttpServlet {
       case "withdraw_funds":
         
         // Technical requirement: withdraw 20 random amounts;
+        loop = String.valueOf(reqJSON.get(loopKey));    
+        loopCount = loop.isEmpty() ? 1: Short.valueOf(loop);
+
         try {
           final String accountNumber = (String) reqJSON.get(AccountCredentialHashMapKeys.accountNumber.name());
           final WithdrawalManager withdrawalManager = new WithdrawalManager(accountNumber);          
@@ -144,6 +155,30 @@ public class AccountManagementServlet extends HttpServlet {
           System.out.println("funds withdrawn: " + resJSON);
         } catch (Exception ex) {
           System.out.println("error@withdraw_funds case: " + ex.getMessage());
+        }
+
+        break;
+      case "txn_history":
+        
+        // Technical requirement: display transaction for account or all transactions in system;
+        ArrayList<TransactionLog> txns = new ArrayList<TransactionLog>();
+        try {
+          final String accountNumber = (String) reqJSON.get(AccountCredentialHashMapKeys.accountNumber.name());
+          final TransactionManager txnManager = new TransactionManager(accountNumber);          
+          txns = txnManager.history();
+                    
+          System.out.println("funds withdrawn: " + resJSON);
+        } catch (JSONException ex) {
+          System.out.println("error@jsontxn_history case: " + ex.getMessage());
+          final TransactionManager txnManager = new TransactionManager();          
+          txns = txnManager.history();
+
+        } catch (Exception ex) {
+          System.out.println("error@withdraw_funds case: " + ex.getMessage());
+        } finally {
+
+          Collections.reverse(txns);
+          resJSON = gson.toJson(txns);
         }
 
         break;

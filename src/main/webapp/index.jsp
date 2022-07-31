@@ -143,14 +143,14 @@
                 <label for="amount"><i class="fa fa-envelope"></i> Amount</label>
                 <input type="number" id="amount" name="amount" placeholder="Enter amount">
                 <label for="loop"><i class="fa fa-envelope"></i> Loop</label>
-                <input type="number" id="loop" name="loop" value="20" placeholder="Enter loop number">
+                <input type="number" id="loop" name="loop" value="20" placeholder="Enter number of withdrawals to simulate">
                 <input hidden="true" id="operation" name="operation" value="withdraw_funds">
               </div>              
             </div>
             
             <!-- <input type="submit" value="Make random withdrawals" class="button"> -->
           </form>
-          <button class="button" onclick="submit('withdrawFundsForm')">Make withdrawal</button>
+          <button class="button" onclick="submit('withdrawFundsForm')">Simulate withdrawals</button>
         </div>
       </div>      
     </div>
@@ -164,24 +164,34 @@
     <hr>
     <!-- Transaction logs. -->
     <h2>Transactions Log</h2>
-    <p>All transaction logs or from specific account.</p>
+    <p>Transaction history.</p>
     <div class="row">
       <div class="col-75">
         <div class="container">
-          <form action="/action_page.php">
+          <form id="txnHistoryForm" method="POST" onsubmit="return false">
           
             <div class="row">
               <div class="col-50">                
-                <label for="tnumber"><i class="fa fa-user"></i> Account Number</label>
-                <input type="text" id="tnumber" name="tnumber" placeholder="12345678901">
+                <label for="accountNumber"><i class="fa fa-user"></i> Account Number</label>
+                <input type="text" id="accountNumber" name="accountNumber" placeholder="Leave blank for all history.">
+                <input hidden="true" id="operation" name="operation" value="txn_history">
               </div>              
             </div>
             
-            <input type="submit" value="Transaction Logs" class="button">
+            <!-- <input type="submit" value="Transaction Logs" class="button"> -->
           </form>
+          <button class="button" onclick="submit('txnHistoryForm')">Tramsaction history</button>
         </div>
       </div>      
     </div>
+    <table id="txn_history">
+      <tr>
+        <th>Account Number</th>
+        <th>Txn. Amount</th>
+        <th>Txn. Time</th>
+      </tr>
+    </table>
+    <hr>
 
     <script>
       function submit (formId) {
@@ -209,6 +219,9 @@
                 break;
               case "withdraw_funds":// Operation: Withdraw Funds.
                 handleWithdrawFundsResponse(this.responseText);
+                break;
+              case "txn_history":// Operation: Transaction History.
+                handleTransactionHistoryResponse(this.responseText);
                 break;
             }
           }
@@ -272,6 +285,31 @@
         const table = document.getElementById("withdrawn_funds");
         
         displayTransactions(responseText, table);
+      }
+
+      function handleTransactionHistoryResponse (responseText) {
+        const table = document.getElementById("txn_history");        
+        const txns = JSON.parse(responseText);
+
+        // Clear out table...
+        const rows = table.getElementsByTagName("tr");
+        while (rows.length > 1) {
+          rows[1].parentNode.removeChild(rows[1]);
+        }
+        
+        // Insert new rows to display accounts created.        
+        txns.forEach((txn, i) => {
+          // We already have a table header, so we insert after it.
+          const row = table.insertRow(-1);
+          const accountNumberCell = row.insertCell(0);
+          const amountCell = row.insertCell(1);
+          const timeCell = row.insertCell(2);
+
+          // Account details.
+          accountNumberCell.innerHTML = txn.accountNumber;
+          amountCell.innerHTML = txn.amount;
+          timeCell.innerHTML = txn.formattedDate;
+        });      
       }
     </script>
 

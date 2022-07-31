@@ -46,39 +46,31 @@ public class TransactionManager extends AccountManager {
   public ArrayList<TransactionLog> history () {
 
     // System.out.println("getting history for " + accountNumber);
-    if (this.accountNumber == null) {
+    final boolean useAccountFilter = this.accountNumber == null;
 
-      return this.allTransactions();
-    } else {
-      return this.transactionLogs(TransactionTypesEnum.ALL); 
-    }    
+    return this.transactionLogs(TransactionTypesEnum.ALL, useAccountFilter);
   }
 
   public ArrayList<TransactionLog> depositHistory () {
 
-    return this.transactionLogs(TransactionTypesEnum.DEPOSIT); 
+    return this.transactionLogs(TransactionTypesEnum.DEPOSIT, true); 
   }
 
   public ArrayList<TransactionLog> withdrawalHistory () {
 
-    return this.transactionLogs(TransactionTypesEnum.WITHDRAWAL); 
+    return this.transactionLogs(TransactionTypesEnum.WITHDRAWAL, true); 
   }
 
-  private ArrayList<TransactionLog> allTransactions () {
-    
-    return new ArrayList<TransactionLog>();
-  }
-
-  private ArrayList<TransactionLog> transactionLogs (TransactionTypesEnum type) {
+  private ArrayList<TransactionLog> transactionLogs (TransactionTypesEnum type, boolean useAccountFilter) {
     
     final ArrayList<TransactionLog> txnLogs = new ArrayList<TransactionLog>();
     
     for (TransactionLog ledger: VaultManager.ledger) {
-      System.out.println("ledger amount: " + ledger.amount);
       
-      final boolean pass = ledger.accountNumber.equals(accountNumber);
+      // Determine filtering for a specific account.
+      final boolean passFilter = useAccountFilter ? ledger.accountNumber.equals(accountNumber): !useAccountFilter;
       
-      if (!pass) continue;
+      if (!passFilter) continue;
 
       switch (type) {
         case DEPOSIT: 
