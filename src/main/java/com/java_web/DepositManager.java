@@ -15,8 +15,10 @@ public class DepositManager extends TransactionManager {
     for (int i = 0; i < count; i++) {
 
       final int counter = i + 1;
-      final String amountKey = TransactionDetailsKeys.amount.name();      
-      final double amount = Double.parseDouble((String) json.get(amountKey));
+      final String amountKey = TransactionDetailsKeys.amount.name();
+      final double amountObject = json.getDouble(amountKey);
+      final double amount = amountObject;
+      // amountObject instanceof String ? Double.parseDouble((String) amountObject): amountObject;
       final double adjustedAmount = (double) amount * counter;
       
       if (deposit(adjustedAmount)) System.out.println("deposited " + adjustedAmount); 

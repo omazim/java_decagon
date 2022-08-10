@@ -143,7 +143,7 @@
                 <label for="amount"><i class="fa fa-envelope"></i> Amount</label>
                 <input type="number" id="amount" name="amount" placeholder="Enter amount">
                 <label for="loop"><i class="fa fa-envelope"></i> Loop</label>
-                <input type="number" id="loop" name="loop" value="20" placeholder="Enter number of withdrawals to simulate">
+                <input type="number" id="loop" name="loop" value="25" placeholder="Enter number of withdrawals to simulate">
                 <input hidden="true" id="operation" name="operation" value="withdraw_funds">
               </div>              
             </div>

@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import com.java_web.WithdrawalManager;
+import com.java_web.DepositManager;
 import com.java_web.TransactionLog;
 import com.java_web.AccountManager;
 import com.java_web.VaultManager;
 
-public class WithdrawalManagerTest {  
+public class B_DepositManagerTest {  
     
   @Test
-  public void testWithdrawal () {
+  public void testDeposit () {
         
     final short loop = 1;
     final JSONObject json = new JSONObject();
-    final double amount = 50.00;
+    final double amount = 100.00;
     final String accountNumberKey = "accountNumber";
     final String amountKey = "amount";
     
@@ -29,16 +29,17 @@ public class WithdrawalManagerTest {
     json.put(accountNumberKey, accountNumber);
     json.put(amountKey, amount);
     
-    final WithdrawalManager withdrawalManager = new WithdrawalManager(accountNumber);  
-    final ArrayList<TransactionLog> logs = withdrawalManager.runWithdrawal(json, loop);
+    // final Map.Entry<String, HashMap<String,Object>> entry = AccountManager.accountsMap.entrySet().iterator().next();
+    // final String accountNumber = entry.getKey();
+    final DepositManager depositManager = new DepositManager(accountNumber);  
+    final ArrayList<TransactionLog> logs = depositManager.runDeposits(json, loop);
     
-    // Assert that amount withdrawm is the amount we posted.
-    final double amountWithdrawn = logs.get(0).amount;
-    assertEquals(amountWithdrawn, (amount * -1), 0);
+    // Assert that amount deposited is the amount we posted.
+    final double amountDeposited = logs.get(0).amount;
+    assertEquals(amountDeposited, amount, 0);
 
-    // Assert that the balance is 50 (because we deposited 100 but are withdrawing 50).
-    final double depositedAmount = 100.00;
-    final double expectedBalanceInAccount = depositedAmount - amount;
+    // Assert that the balance is 100 (because we dposited 100).
+    final double expectedBalanceInAccount = amount;
     final double actualBalanceInAccount = VaultManager.accountBalancesMap.get(accountNumber);
     
     assertEquals(expectedBalanceInAccount, actualBalanceInAccount, 0);

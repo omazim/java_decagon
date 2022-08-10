@@ -16,7 +16,8 @@ public class WithdrawalManager extends TransactionManager {
 
       final int counter = i + 1;
       final String amountKey = TransactionDetailsKeys.amount.name();      
-      final double amount = Double.parseDouble((String) json.get(amountKey));
+      // final double amount = Double.parseDouble((String) json.get(amountKey));
+      final double amount = json.getDouble(amountKey);
       final double adjustedAmount = (double) amount * counter;
       
       if (withdraw(adjustedAmount)) System.out.println("withdrawn " + adjustedAmount); 

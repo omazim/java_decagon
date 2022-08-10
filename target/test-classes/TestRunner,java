@@ -9,11 +9,11 @@ public class TestRunner {
     List testCases = new ArrayList();
  
     // Add test cases
-    testCases.add(TestCreateAccount.class);
     // testCases.add(TestCreateAccount.class);
     // testCases.add(TestCreateAccount.class);
     // testCases.add(TestCreateAccount.class);
- 
+    // testCases.add(TestCreateAccount.class);
+    System.out.println("@TestRunner.main");
     for (Class testCase : testCases) {
       runTestCase(testCase);
       System.out.println("@test");
