@@ -21,9 +21,9 @@ public class TransactionLog {
     this.formattedDate = formattedDate;
   }
 
-  String accountNumber;
-  double amount;
-  LocalDateTime createdAt;
-  String formattedDate;
-  double runningBalance;
+  public String accountNumber;
+  public double amount;
+  private LocalDateTime createdAt;
+  public String formattedDate;
+  public double runningBalance;
 }
