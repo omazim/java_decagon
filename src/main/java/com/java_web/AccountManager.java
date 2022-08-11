@@ -15,7 +15,7 @@ public class AccountManager extends VaultManager {
     super(accountNumber);
   }
 
-  public void updateAccounts () {
+  private void updateAccounts () {
     
     final HashMap<String, Object> details = new HashMap<String, Object>();
     try {
@@ -44,11 +44,13 @@ public class AccountManager extends VaultManager {
   private short accountNameMaxLength = 20;
    
   protected void generateAccountNumber () {
-    System.out.println("generating account number...");
+    // System.out.println("generating account number...");
         
-    Random random = new Random();
-    String digits = String.valueOf(Math.abs(random.nextLong())).substring(0, 9); 
-    this.accountNumber = "0" + digits;
+    final Random random = new Random();
+    final String digits = String.valueOf(Math.abs(random.nextLong())).substring(0, 9);
+
+    final String prefixDigit = String.valueOf(Math.abs(random.nextInt(10)));
+    this.accountNumber = prefixDigit + digits;
   }
 
   protected void openAccount () {

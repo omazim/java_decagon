@@ -3,7 +3,6 @@ package com.java_web;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class CreateAccount {
@@ -39,9 +38,9 @@ public class CreateAccount {
       Account account = new Account(credentialsMap);
       
       if (account.isOpened) accountsList.add(account);
-      System.out.println("account on loop " + counter + " opened.");
+      // System.out.println("account on loop " + counter + " opened.");
     }
-    System.out.println("accounts opened in request: " + accountsList);
+    // System.out.println("accounts opened in request: " + accountsList);
     return accountsList;
   }
 }
