@@ -33,6 +33,7 @@ A test for competency in Java.
   This class exposes the following:
   - A static account balances map as a ConcurrentHashMap. This map is keyed by the account number and holds the balance on that account.
   - A static ledger as a ConcurrentLinkedQueue. This queue holds every transaction done on the system.
+
 - ## TransactionManager
   This class extends VaultsManager and exposes methods to:
   - deposit: to make a deposit, 
@@ -42,29 +43,37 @@ A test for competency in Java.
   - history: to retrieve all history on an account or all accounts (deposits and withdrawals).  
 
   > The methods for retrieving transaction history accepts arguments to determine what type of transaction history to retrieve and whether to use to filter for a target account or not.
+
 - ## AccountManager
   This class extends VaultsManager as well and exposes methods to:
   - generateAccountNumber: to generate a random account number, 
   - openAccount: to register a new account in the accounts map and update its initial balance,
   > The class also has protected or private methods to validate account name and phone number before opening an account.
+
 - ## Account
   > This class extends AccountsManager and calls its parent method to create an account.
+
 - ## CreateAccount
   This class is used only from the servlet to handle the request for opening an account.
   > The number of accounts opened depends on the loop integer passed to it in the http request. It simply calls the Account class.
+
 - ## DepositManager
   This class extends the TransactionManager and is used only from the servlet to handle deposit requests.  
   It exposes a `runDeposit` method that accepts the amount to deposit and the number of times to perform the deposit.  
   > If the `loop` argument is greater than 1, then successive deposit amounts will be simple multiples of the original amount.
+
 - ## WithdrawalManager
   This class extends the TransactionManager and is used only from the servlet to handle withdrawal requests.  
   It exposes a `runWithdrawal` method that accepts the amount to withdraw and the number of times to perform the withdrawal.  
   > If the `loop` argument is greater than 1, then successive withdrawal amounts will be simple multiples of the original amount.
+
 - ## AccountManagementServlet
   This class is the main servlet that handles all the requests from the client.  
   > It uses a _switch_ expression to handle each of the operations required.
+
 - ## TransactionTypesEnum, LedgerDetailsKeys, AccountTypesAccountInterface, AccountCredentialHashMapKeys & AccountCredentialsException, TransactionResult
   These are additional classes representing enums, interfaces and exception that are necessary.  
+
 - ## Main
   There's a Main class that is unused.  
 
@@ -78,11 +87,13 @@ A test for competency in Java.
   - Scheduled time-boxed meets (schedule depends on whether the team is remote, onsite or hybrid).  
   - Backlog discussions and priorities.
   - Communication and feedback catchups.
+
 - ## Do you have experience in any enterprise software architecture?
   - Serverless architecture:  
     Since 2019, I have led my team twice to migrate from shared hosting to Google Cloud Platform. Our backend now runs on cloud functions, pub sub routines and callable http functions.  
   - Microservices:  
     My team's backend code base is split into contextual categories. Even though they reside on the same project today, they can still run out of diverse locations or projects and deliver the same result.
+
 - ## Do you have any experience with code review? If your answer is yes, kindly provide what you look for in your code review sessions.
   I perform code review every working day. In my reviews, I look out for the following:  
   - Structure  
@@ -96,11 +107,8 @@ A test for competency in Java.
   - Testability  
     Whether the code body in review can be tested easily.
 
-
 - ## How do you intend to track the performance of your team?
   To track team performance, I would:
   - Observe the Issues open and close rates  
   - Observe the team's velocity (sprints and iterations)  
   - Observe the time it takes the team from idea/design conversation sessions to delivery.
-
-
