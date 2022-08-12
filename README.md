@@ -1,6 +1,14 @@
 # java_decagon
 A test for competency in Java.
 
+# Run the application using docker.
+- In docker, run `docker run -it -p 4000:8080 java_web_demo_image:1.1` to start the container.
+- Application listens on port 4000 on host system. Visit [java_web_demo](http://localhost:4000/java_web_demo) on your browser to use the application.
+
+# Execute tests.
+- Clone from the repo on Github at [omazim's github java_noframework](https://github.com/omazim/java_noframework_project.git).
+- Run `mvn install', which will build project and also execute all the tests in the code.  
+
 # Problem Statement
 - Build an account management application that supports the creation of a new account, deposit, transaction log, and withdrawal.
 
@@ -8,7 +16,7 @@ A test for competency in Java.
 - ## Account creation
   This operation accepts an account name and a phone number and returns a 10-digit account number which is guaranteed to be unique because it is two-part randomized.  
 
-  > In a larger real life project, uniqueness will be further guaranteed by attempting to retrieve am account record with the generated account number. If no such record exists, then uniqueness is further guaranteed.  
+  > In a larger real-life project, uniqueness will be further guaranteed by attempting to retrieve an account record with the generated account number. If no such record exists, then uniqueness is defintely guaranteed.  
 
 - ## Deposit
   This operation accepts an account number and an amount to deposit. The test confirms the balance in the account and the amount deposited.  
@@ -30,24 +38,27 @@ A test for competency in Java.
 
 # Design
 - ## VaultManager
-  This class exposes the following:
-  - A static account balances map as a ConcurrentHashMap. This map is keyed by the account number and holds the balance on that account.
-  - A static ledger as a ConcurrentLinkedQueue. This queue holds every transaction done on the system.
+  This class exposes the following fields:
+  - A static `accountBalances` map as a ConcurrentHashMap. This map is keyed by the account number and holds the balance on that account.
+  - A static `ledger` as a ConcurrentLinkedQueue. This queue holds every transaction done on the system.
+  - `accountNumber`,  
+  - `accountName`,  
+  - `phoneNumber`
 
 - ## TransactionManager
   This class extends VaultsManager and exposes methods to:
-  - deposit: to make a deposit, 
-  - withdraw: to make a withdrawal,
-  - depositHistory: to retrieve deposit history of an account,
-  - withdrawalHistory: to retrieve withdrawal history on an account,
-  - history: to retrieve all history on an account or all accounts (deposits and withdrawals).  
+  - `deposit`: to make a deposit, 
+  - `withdraw`: to make a withdrawal,
+  - `depositHistory`: to retrieve deposit history of an account,
+  - `withdrawalHistory`: to retrieve withdrawal history on an account,
+  - `history`: to retrieve all history on an account or all accounts (deposits and withdrawals).  
 
   > The methods for retrieving transaction history accepts arguments to determine what type of transaction history to retrieve and whether to use to filter for a target account or not.
 
 - ## AccountManager
   This class extends VaultsManager as well and exposes methods to:
-  - generateAccountNumber: to generate a random account number, 
-  - openAccount: to register a new account in the accounts map and update its initial balance,
+  - `generateAccountNumber`: to generate a random account number, 
+  - `openAccount`: to register a new account in the accounts map and update its initial balance.
   > The class also has protected or private methods to validate account name and phone number before opening an account.
 
 - ## Account
@@ -109,6 +120,6 @@ A test for competency in Java.
 
 - ## How do you intend to track the performance of your team?
   To track team performance, I would:
-  - Observe the Issues open and close rates  
-  - Observe the team's velocity (sprints and iterations)  
+  - Observe the Issues open and close rates.  
+  - Observe the team's velocity (sprints and iterations).
   - Observe the time it takes the team from idea/design conversation sessions to delivery.

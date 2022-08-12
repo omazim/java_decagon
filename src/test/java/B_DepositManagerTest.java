@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import com.java_web.DepositManager;
-import com.java_web.TransactionLog;
-import com.java_web.AccountManager;
-import com.java_web.VaultManager;
+import com.java_web.account.AccountManager;
+import com.java_web.transaction.DepositManager;
+import com.java_web.transaction.TransactionLog;
+import com.java_web.vault.VaultManager;
 
 public class B_DepositManagerTest {  
     
@@ -29,8 +29,6 @@ public class B_DepositManagerTest {
     json.put(accountNumberKey, accountNumber);
     json.put(amountKey, amount);
     
-    // final Map.Entry<String, HashMap<String,Object>> entry = AccountManager.accountsMap.entrySet().iterator().next();
-    // final String accountNumber = entry.getKey();
     final DepositManager depositManager = new DepositManager(accountNumber);  
     final ArrayList<TransactionLog> logs = depositManager.runDeposits(json, loop);
     

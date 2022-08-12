@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: TransactionManagerTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.017 s <<< FAILURE! - in TransactionManagerTest
-testTransactionHistory(TransactionManagerTest)  Time elapsed: 0.011 s  <<< FAILURE!
-java.lang.AssertionError: expected:<2.0> but was:<1.0>
-	at TransactionManagerTest.testTransactionHistory(TransactionManagerTest.java:29)
-

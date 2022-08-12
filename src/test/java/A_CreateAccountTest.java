@@ -2,10 +2,14 @@ import static org.junit.Assert.assertEquals;
 
 import org.json.JSONObject;
 import org.junit.Test;
+
+import com.java_web.account.AccountInterface;
+import com.java_web.account.AccountManager;
+import com.java_web.account.CreateAccount;
+
 import java.util.ArrayList;
-import com.java_web.CreateAccount;
-import com.java_web.AccountInterface;
-import com.java_web.AccountManager;
+
+import java.util.ArrayList;
 
 public class A_CreateAccountTest {
     
@@ -24,8 +28,9 @@ public class A_CreateAccountTest {
 
     json.put(accountNameKey, accountName);
     json.put(phoneNumberKey, phoneNumber);
-    // System.out.println(json.toString());
-    final ArrayList<AccountInterface> accountsList = CreateAccount.createAccount(json, loop);
+
+    // List of accounts created.
+    final ArrayList<AccountInterface> accountsList = CreateAccount.createAccount(json, loop);    
     final int size = accountsList.size();    
 
     // Assert that this (loop) many accounts were created.
@@ -36,7 +41,7 @@ public class A_CreateAccountTest {
     final String message2 = "Check that account number is exactly 10 digits long.";
     final String accountNumber = AccountManager.accountsMap.keys().nextElement();
     final int nubanLength = 10;
-    // System.out.println("nuban length " + nubanLength + " == account number length " + accountNumber.length());
+
     assertEquals(message2, nubanLength, accountNumber.length());
   }    
 }  

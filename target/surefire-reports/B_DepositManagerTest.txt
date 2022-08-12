@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: B_DepositManagerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s - in B_DepositManagerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.436 s - in B_DepositManagerTest

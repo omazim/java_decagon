@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import com.java_web.WithdrawalManager;
-import com.java_web.TransactionLog;
-import com.java_web.AccountManager;
-import com.java_web.VaultManager;
+import com.java_web.account.AccountManager;
+import com.java_web.transaction.TransactionLog;
+import com.java_web.transaction.WithdrawalManager;
+import com.java_web.vault.VaultManager;
 
 public class C_WithdrawalManagerTest {  
     

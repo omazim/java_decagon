@@ -7,7 +7,7 @@
 
   <servlet>
     <servlet-name>AccountManagementServlet</servlet-name>
-    <servlet-class>com.java_web.AccountManagementServlet</servlet-class>
+    <servlet-class>com.java_web.account.AccountManagementServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="A_CreateAccountTest" time="0.106" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="A_CreateAccountTest" time="0.21" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\infos\AppData\Local\Temp\surefire15808661418014377276\surefirebooter5937189958486588238.jar C:\Users\infos\AppData\Local\Temp\surefire15808661418014377276 2022-08-11T06-53-13_614-jvmRun1 surefire10933062138754145924tmp surefire_014984151483061317321tmp"/>
+    <property name="sun.java.command" value="C:\Users\infos\AppData\Local\Temp\surefire8655207242713309774\surefirebooter11099337754505318291.jar C:\Users\infos\AppData\Local\Temp\surefire8655207242713309774 2022-08-12T13-29-53_136-jvmRun1 surefire7964858458117969169tmp surefire_07278655572854390075tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\wamp\www\java_decagon\target\test-classes;C:\wamp\www\java_decagon\target\classes;C:\Users\infos\.m2\repository\javax\servlet\javax.servlet-api\4.0.1\javax.servlet-api-4.0.1.jar;C:\Users\infos\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\infos\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\infos\.m2\repository\org\json\json\20190722\json-20190722.jar;C:\Users\infos\.m2\repository\com\google\code\gson\gson\2.9.0\gson-2.9.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\infos\AppData\Local\Temp\surefire15808661418014377276\surefirebooter5937189958486588238.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\infos\AppData\Local\Temp\surefire8655207242713309774\surefirebooter11099337754505318291.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.1+13-LTS"/>
@@ -60,5 +60,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testCreateAccount" classname="A_CreateAccountTest" time="0.021"/>
+  <testcase name="testCreateAccount" classname="A_CreateAccountTest" time="0.097"/>
 </testsuite>

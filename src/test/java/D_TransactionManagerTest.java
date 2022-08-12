@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.java_web.TransactionManager;
-import com.java_web.TransactionLog;
-import com.java_web.AccountManager;
+import com.java_web.account.AccountManager;
+import com.java_web.transaction.TransactionLog;
+import com.java_web.transaction.TransactionManager;
 
 public class D_TransactionManagerTest {  
     
